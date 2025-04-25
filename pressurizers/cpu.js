@@ -2,26 +2,34 @@ const {logger} = require("../logger");
 const fs = require('fs');
 const process = require('process');
 
-const isPrimeSync = (num) =>{
+const isPrimeSync = (num) => {
     for(let i = 2, s = Math.sqrt(num); i <= s; i++)
         if(num % i === 0) return false;
     return num > 1;
 }
+
 const outputFilename = 'outputCpu.txt'
 const start = Date.now();
 
-const pressurizeCpu = async ()=> {
+const pressurizeCpu = async () => {
     let i = 0;
-    for(let stop=Date.now();stop-start < 600000;stop = Date.now()){
-        if(isPrimeSync(i)){
-            logger.info(`Elasped time: ${stop-start}`);
-            const msg = `${i} is prime`;
+    // Run for 10 minutes
+    for(let stop = Date.now(); stop - start < 600000; stop = Date.now()) {
+        // Check every 1000th number
+        if(i % 1000 === 0 && isPrimeSync(i)) {
+            logger.info(`Elapsed time: ${stop-start}`);
+            const msg = `${i} is prime\n`;
             logger.info(msg);
             await fs.promises.appendFile(outputFilename, msg)
                 .catch(e => {
                     logger.error(e.message)
-                })
-        }i++;
+                });
+        }
+        i++;
+        // Add a 10ms pause every 1000 iterations
+        if(i % 1000 === 0) {
+            await new Promise(resolve => setTimeout(resolve, 10));
+        }
     }
 }
 
