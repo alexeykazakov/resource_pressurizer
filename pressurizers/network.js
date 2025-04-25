@@ -8,7 +8,6 @@ const start = Date.now();
 
 const pressurizeNetwork = async ()=> {
     const outputFilename = 'outputNetwork.txt'
-    const milliSecs = 50;
     async function callApi() {
         const url = `https://api.publicapis.org/entries`;
         const config = {
@@ -40,11 +39,11 @@ const pressurizeNetwork = async ()=> {
                 logger.error(e.message)
             })
     }
-    // Run for 5 minutes
-    for(let stop=Date.now();stop-start < 300000;stop = Date.now()){
+    // Run for 10 minutes
+    for(let stop=Date.now();stop-start < 600000;stop = Date.now()){
         await callApi();
-        // Pause for 10ms second between requests
-        await new Promise(resolve => setTimeout(resolve, 10));
+        // // Pause for 10ms second between requests
+        // await new Promise(resolve => setTimeout(resolve, 10));
     }
 }
 
