@@ -15,8 +15,8 @@ const pressurizeCpu = async () => {
     let i = 0;
     // Run for 10 minutes
     for(let stop = Date.now(); stop - start < 600000; stop = Date.now()) {
-        // Check every 1000th number
-        if(i % 1000 === 0 && isPrimeSync(i)) {
+        // Check every 10th number
+        if(i % 10 === 0 && isPrimeSync(i)) {
             logger.info(`Elapsed time: ${stop-start}`);
             const msg = `${i} is prime\n`;
             logger.info(msg);
