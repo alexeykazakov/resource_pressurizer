@@ -13,10 +13,10 @@ const start = Date.now();
 
 const pressurizeCpu = async () => {
     let i = 0;
-    // Run for 10 minutes
-    for(let stop = Date.now(); stop - start < 600000; stop = Date.now()) {
-        // Check every 10th number
-        if(i % 10 === 0 && isPrimeSync(i)) {
+    // Run for 5 minutes
+    for(let stop = Date.now(); stop - start < 300000; stop = Date.now()) {
+        // Check every 100th number
+        if(i % 100 === 0 && isPrimeSync(i)) {
             logger.info(`Elapsed time: ${stop-start}`);
             const msg = `${i} is prime\n`;
             logger.info(msg);
@@ -26,8 +26,8 @@ const pressurizeCpu = async () => {
                 });
         }
         i++;
-        // Add a 10ms pause every 1000 iterations
-        if(i % 1000 === 0) {
+        // Add a 10ms pause every 100 iterations
+        if(i % 100 === 0) {
             await new Promise(resolve => setTimeout(resolve, 10));
         }
     }
