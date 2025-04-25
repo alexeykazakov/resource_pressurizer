@@ -26,9 +26,9 @@ const pressurizeCpu = async () => {
                 });
         }
         i++;
-        // Add a 10ms pause every 1000 iterations
+        // Add a 100ms pause every 1000 iterations
         if(i % 1000 === 0) {
-            await new Promise(resolve => setTimeout(resolve, 10));
+            await new Promise(resolve => setTimeout(resolve, 100));
         }
     }
 }
