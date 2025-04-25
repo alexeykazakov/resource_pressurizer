@@ -23,12 +23,10 @@ const pressurizeCpu = async () => {
                 .catch(e => {
                     logger.error(e.message)
                 });
-        }
-        i++;
-        // Add a 10ms pause every 1000 iterations
-        if(i % 1000 === 0) {
+            // Pause for 10ms second
             await new Promise(resolve => setTimeout(resolve, 10));
         }
+        i++;
     }
 }
 

@@ -42,8 +42,8 @@ const pressurizeNetwork = async ()=> {
     // Run for 10 minutes
     for(let stop=Date.now();stop-start < 600000;stop = Date.now()){
         await callApi();
-        // // Pause for 10ms second between requests
-        // await new Promise(resolve => setTimeout(resolve, 10));
+        // Pause for 50ms second between requests
+        await new Promise(resolve => setTimeout(resolve, 50));
     }
 }
 
